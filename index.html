@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASOREVID - Asociación de Recicladores por una Nueva Vida</title>
+
+    <!-- METADATOS SEO & OPEN GRAPH -->
+    <meta name="description" content="ASOREVID - Asociación de Recicladores por una Nueva Vida. Prestación eficiente y sostenible del servicio de aprovechamiento de residuos sólidos en Bogotá D.C.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ASOREVID - Servicio de Aprovechamiento de Residuos Sólidos">
+    <meta property="og:description" content="Organización de recicladores de oficio enfocada en el cuidado ambiental y el desarrollo sostenible en Bogotá D.C.">
+    <meta property="og:image" content="IMAGEN PORTADA ASOREVID.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/jpeg" href="LOGO ASOREVID.jpg">
+
+    <!-- CONEXIÓN ANTICIPADA A CDN (Optimización de Carga) -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+
+    <!-- MEDIDAS DE SEGURIDAD (CSP & Frames) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; connect-src 'self' ws: wss: https://api.emailjs.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.tile.openstreetmap.org https://images.unsplash.com; font-src 'self' https://cdnjs.cloudflare.com; frame-src 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <!-- CSS Externos (Leaflet Maps & FontAwesome) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- SCRIPT DE EMAILJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("CFpArpYeOSQvLlEqG");
+       })();
+    </script>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="LOGO ASOREVID.jpg" alt="Logo ASOREVID" class="logo-img">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#servicios">Nuestro Servicio</a></li>
+                <li><a href="#documentacion">Documentación</a></li>
+                <li><a href="#pqr">PQR</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <!-- SECCIÓN INICIO -->
+        <section id="inicio" class="section active-section">
+            <div class="hero">
+                <img src="IMAGEN PORTADA ASOREVID.jpg" alt="Equipo de recicladores de ASOREVID" class="hero-img">
+                <div class="hero-text">
+                    <h1>ASOCIACIÓN DE RECICLADORES POR UNA NUEVA VIDA</h1>
+                    <p>Prestación eficiente y sostenible del servicio de aprovechamiento de residuos sólidos en Bogotá D.C.</p>
+                </div>
+            </div>
+
+            <div class="container cards-grid">
+                <div class="card info-legal">
+                    <h2><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Información Legal</h2>
+                    <p><strong>Razón Social:</strong> Asociación de Recicladores Por Una Nueva Vida</p>
+                    <p><strong>NIT:</strong> 901.395.377 – 4</p>
+                    <p><strong>RUPS:</strong> Certificación Nro. 20251449245444459</p>
+                    <p><strong>Registro Local (UAESP - RUOR):</strong> Resolución 400 del 25 de mayo de 2023</p>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Misión</h2>
+                    <p>Propender por la excelencia y la eficacia en los diferentes procesos de ASOREVID, a través de herramientas como el respeto, trabajo en equipo y solidaridad, buscando la satisfacción de todos nuestros clientes y el desarrollo empresarial.</p>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fa-solid fa-eye" aria-hidden="true"></i> Visión</h2>
+                    <p>Trabajar hacia un crecimiento rentable, que nos permita ubicarnos en los puestos más altos de la industria del aprovechamiento de residuos sólidos, llevando a nuestros usuarios, recicladores y colaboradores a vivir una excelente experiencia en cuidado ambiental.</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <h2><i class="fa-solid fa-heart" aria-hidden="true"></i> Nuestros Valores</h2>
+                <div class="values-grid">
+                    <span class="badge">Respeto por la Vida</span>
+                    <span class="badge">Igualdad</span>
+                    <span class="badge">Trabajo en Equipo</span>
+                    <span class="badge">Honestidad</span>
+                    <span class="badge">Pasión por lo que hacemos</span>
+                    <span class="badge">Respeto</span>
+                    <span class="badge">Lealtad</span>
+                    <span class="badge">Adaptabilidad</span>
+                    <span class="badge">Diligencia</span>
+                    <span class="badge">Libertad de expresión</span>
+                    <span class="badge">Solidaridad</span>
+                </div>
+            </div>
+
+            <div class="container">
+                <h2><i class="fa-solid fa-sitemap" aria-hidden="true"></i> Estructura Organizativa</h2>
+                <div class="table-responsive">
+                    <table class="org-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Entidad / Rol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>REPRESENTANTE LEGAL</td><td>Principal</td></tr>
+                            <tr><td>REPRESENTANTE LEGAL SUPLENTE</td><td>Suplente</td></tr>
+                            <tr><td>TESORERO</td><td>Gestión Financiera</td></tr>
+                            <tr><td>SECRETARIO</td><td>Gestión Administrativa</td></tr>
+                            <tr><td>VOCAL 1</td><td>Representación de Asociados</td></tr>
+                            <tr><td>VOCAL 2</td><td>Representación de Asociados</td></tr>
+                            <tr><td>ASOCIADOS</td><td>Recicladores de Oficio</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN NUESTRO SERVICIO -->
+        <section id="servicios" class="section">
+            <div class="container">
+                <h2><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Cobertura y Mapa de Servicio</h2>
+                <p>Mapa interactivo del área de prestación del servicio (APS) en las principales localidades de Bogotá D.C.</p>
+                <div id="map"></div>
+                
+                <div class="download-card">
+                    <div class="download-info">
+                        <i class="fa-solid fa-file-pdf download-icon" aria-hidden="true"></i>
+                        <div>
+                            <h3>Portafolio de Servicios ASOREVID</h3>
+                            <p>Descarga nuestro portafolio de servicios y condiciones comerciales unificadas en formato .PDF</p>
+                        </div>
+                    </div>    
+                    <a href="PORTAFOLIO-DE-SERVICIOS-ASOREVID-2026.pdf" download="PORTAFOLIO-DE-SERVICIOS-ASOREVID.pdf" class="btn-download">
+                        <i class="fa-solid fa-download" aria-hidden="true"></i> Descargar Documento
+                    </a>
+                </div>
+            </div>
+
+            <div class="container">
+                <h2><i class="fa-solid fa-boxes-packing" aria-hidden="true"></i> Materiales Aprovechables Aceptados</h2>
+                <p>Clasificación según el Código Nacional de Colores (Resolución 2184 de 2019)</p>
+                <div class="materials-grid" id="materialsContainer">
+                    <!-- Carga dinámica con JS -->
+                </div>
+            </div>
+
+            <div class="container">
+                <h2><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Programa de Prestación del Servicio (100 Rutas)</h2>
+                <p>Horarios, frecuencias y microrutas de recolección de residuos aprovechables.</p>
+                <div class="filter-box">
+                    <input type="text" id="routeSearch" placeholder="Buscar por barrio o localidad..." autocomplete="off">
+                </div>
+                <div class="table-responsive table-scroll">
+                    <table class="routes-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID Ruta</th>
+                                <th scope="col">Localidad</th>
+                                <th scope="col">Barrio / Microruta</th>
+                                <th scope="col">Días de Recolección</th>
+                                <th scope="col">Horario</th>
+                            </tr>
+                        </thead>
+                        <tbody id="routesTableBody">
+                            <!-- Carga dinámica con JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DOCUMENTACIÓN -->
+        <section id="documentacion" class="section">
+            <div class="container">
+                <h2><i class="fa-solid fa-file-contract" aria-hidden="true"></i> Documentación y Transparencia Legal</h2>
+                <div class="docs-grid">
+                    <div class="doc-card">
+                        <div>
+                            <i class="fa-solid fa-certificate doc-icon" aria-hidden="true"></i>
+                            <h3>Registro Superservicios (RUPS)</h3>
+                            <p><strong>Nro. Certificación:</strong> 20251449245444459</p>
+                            <p><strong>Fecha de certificación:</strong> 01/04/2025</p>
+                        </div>
+                    </div>
+
+                    <div class="doc-card">
+                        <div>
+                            <i class="fa-solid fa-building-shield doc-icon" aria-hidden="true"></i>
+                            <h3>Registro Local (RUOR - UAESP)</h3>
+                            <p>Inscripción en el Registro Único de Organizaciones de Recicladores mediante <strong>Resolución 400 del 25 de mayo de 2023</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="doc-card">
+                        <div>
+                            <i class="fa-solid fa-file-pdf doc-icon" aria-hidden="true"></i>
+                            <h3>Contrato de Condiciones Uniformes (CCU)</h3>
+                            <p>Documento oficial que rige las condiciones de la prestación del servicio para los usuarios.</p>
+                        </div>
+                        <a href="CCU ESCANER.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">
+                            <i class="fa-solid fa-download" aria-hidden="true"></i> Descargar CCU (PDF)
+                        </a>
+                    </div>
+
+                    <div class="doc-card">
+                        <div>
+                            <i class="fa-solid fa-calculator doc-icon" aria-hidden="true"></i>
+                            <h3>Presupuesto ASOREVID 2026</h3>
+                            <p>Proyección financiera y asignación de recursos aprobada para el periodo fiscal 2026.</p>
+                        </div>
+                        <a href="PRESUPUESTO ASOREVID 2026.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">
+                            <i class="fa-solid fa-download" aria-hidden="true"></i> Descargar Presupuesto (PDF)
+                        </a>
+                    </div>
+
+                    <div class="doc-card">
+                        <div>
+                            <i class="fa-solid fa-chart-line doc-icon" aria-hidden="true"></i>
+                            <h3>Estados Financieros ASOREVID 2025</h3>
+                            <p>Informe del estado de situación financiera y rendición de cuentas correspondiente al año 2025.</p>
+                        </div>
+                        <a href="ESTADOS FINANCIEROS ASOREVID 2025.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">
+                            <i class="fa-solid fa-download" aria-hidden="true"></i> Descargar EEFF (PDF)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PQR -->
+        <section id="pqr" class="section">
+            <div class="container">
+                <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> Peticiones, Quejas y Recursos (PQR)</h2>
+                <p>Radique su solicitud de forma directa. Sus datos están protegidos y serán procesados de forma segura.</p>
+                
+                <div id="pqrAlert" class="alert hidden"></div>
+
+                <form id="pqrForm" class="pqr-form" novalidate>
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo *</label>
+                        <input type="text" id="nombre" name="nombre" autocomplete="name" required maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico (Para recibir respuesta) *</label>
+                        <input type="email" id="email" name="email" autocomplete="email" required maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono de Contacto *</label>
+                        <input type="tel" id="telefono" name="telefono" autocomplete="tel" required pattern="[0-9]{7,10}" maxlength="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipoReq">Tipo de Solicitud *</label>
+                        <select id="tipoReq" name="tipoReq" required>
+                            <option value="">Seleccione una opción...</option>
+                            <option value="Peticion">Petición</option>
+                            <option value="Queja">Queja</option>
+                            <option value="Reclamo">Reclamo</option>
+                            <option value="Sugerencia">Sugerencia</option>
+                            <option value="Felicitacion">Felicitación</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">Detalle de la Solicitud *</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" required maxlength="1000"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Radicar PQR
+                    </button>
+                </form>
+                <p class="direct-email">O envíe un correo directo a: <strong>asorevid2020@gmail.com</strong></p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CONTACTO -->
+        <section id="contacto" class="section">
+            <div class="container cards-grid">
+                <div class="card">
+                    <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Sede y Bodega de Acopio (ECA)</h2>
+                    <p><strong>Dirección:</strong> Transversal 42 # 5A - 04, Bogotá D.C, Colombia</p>
+                    <p><strong>Atención al Público:</strong></p>
+                    <ul>
+                        <li>Lunes a Viernes: 8:00 a.m. - 5:00 p.m.</li>
+                        <li>Sábados: 8:00 a.m. - 12:00 p.m.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-phone" aria-hidden="true"></i> Líneas Directas</h2>
+                    <p><strong>Teléfonos / WhatsApp:</strong></p>
+                    <p><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> 312 767 5177</p>
+                    <p><i class="fa-solid fa-phone-flip" aria-hidden="true"></i> 314 430 4454</p>
+                    <p><strong>Correo Electrónico:</strong> asorevid2020@gmail.com</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ASOREVID - Todos los derechos reservados. Compromiso y Sostenibilidad Ambiental.</p>
+    </footer>
+
+    <!-- JS Externos e Interno -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
