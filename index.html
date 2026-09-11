@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASOREVID - Asociación de Recicladores por una Nueva Vida</title>
 
-    <!-- METADATOS SEO & OPEN GRAPH -->
     <meta name="description" content="ASOREVID - Asociación de Recicladores por una Nueva Vida. Prestación eficiente y sostenible del servicio de aprovechamiento de residuos sólidos en Bogotá D.C.">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="ASOREVID - Servicio de Aprovechamiento de Residuos Sólidos">
@@ -13,34 +12,36 @@
     <meta property="og:image" content="IMAGEN PORTADA ASOREVID.jpg">
     <meta property="og:type" content="website">
 
-    <!-- FAVICON -->
     <link rel="icon" type="image/jpeg" href="LOGO ASOREVID.jpg">
 
-    <!-- CONEXIÓN ANTICIPADA A CDN (Optimización de Carga) -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-    <!-- MEDIDAS DE SEGURIDAD (CSP & Frames) -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; connect-src 'self' ws: wss: https://api.emailjs.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.tile.openstreetmap.org https://images.unsplash.com; font-src 'self' https://cdnjs.cloudflare.com; frame-src 'none';">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
-    <!-- CSS Externos (Leaflet Maps & FontAwesome) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
-    <!-- SCRIPT DE EMAILJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
+    
        (function(){
           emailjs.init("CFpArpYeOSQvLlEqG");
        })();
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+        <!-- SCRIPT DE CHART.JS (Para el gráfico) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- NUEVO: Plugin para etiquetas de datos sobre las barras -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 </head>
 <body>
 
-    <!-- NAVEGACIÓN -->
     <header class="navbar">
         <div class="logo-container">
             <img src="LOGO ASOREVID.jpg" alt="Logo ASOREVID" class="logo-img">
@@ -50,13 +51,13 @@
                 <li><a href="#inicio" class="active">Inicio</a></li>
                 <li><a href="#servicios">Nuestro Servicio</a></li>
                 <li><a href="#documentacion">Documentación</a></li>
+                <li><a href="#galeria">Galería</a></li>
                 <li><a href="#pqr">PQR</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main>
         <!-- SECCIÓN INICIO -->
         <section id="inicio" class="section active-section">
@@ -151,11 +152,17 @@
             </div>
 
             <div class="container">
+                <h2><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Gestión de Residuos: Aprovechamiento vs Rechazo</h2>
+                <p>Comparativo anual de toneladas aprovechadas y toneladas de rechazo (2024 - 2026).</p>
+                <div class="grafico-wrapper">
+                    <canvas id="graficoToneladas" aria-label="Gráfico comparativo de toneladas aprovechadas y de rechazo" role="img"></canvas>
+                </div>
+            </div>
+
+            <div class="container">
                 <h2><i class="fa-solid fa-boxes-packing" aria-hidden="true"></i> Materiales Aprovechables Aceptados</h2>
                 <p>Clasificación según el Código Nacional de Colores (Resolución 2184 de 2019)</p>
-                <div class="materials-grid" id="materialsContainer">
-                    <!-- Carga dinámica con JS -->
-                </div>
+                <div class="materials-grid" id="materialsContainer"></div>
             </div>
 
             <div class="container">
@@ -175,9 +182,7 @@
                                 <th scope="col">Horario</th>
                             </tr>
                         </thead>
-                        <tbody id="routesTableBody">
-                            <!-- Carga dinámica con JS -->
-                        </tbody>
+                        <tbody id="routesTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -241,6 +246,57 @@
             </div>
         </section>
 
+                <!-- SECCIÓN GALERÍA -->
+        <section id="galeria" class="section">
+            <div class="container">
+                <h2><i class="fa-solid fa-images" aria-hidden="true"></i> Galería ASOREVID</h2>
+                <p>Conoce nuestro equipo, nuestras bodegas de acopio y las actividades que realizamos día a día por una nueva vida.</p>
+                
+                <div class="galeria-grid">
+                    <!-- Foto 1: Equipo completo con pancarta -->
+                    <figure class="galeria-item">
+                        <img src="galeria1.jpeg" alt="Equipo ASOREVID en jornada de socialización del Decreto 1381 de 2024" loading="lazy">
+                        <figcaption>Equipo ASOREVID</figcaption>
+                    </figure>
+
+                    <!-- Foto 2: Grupo con funcionarios -->
+                    <figure class="galeria-item">
+                        <img src="galeria2.jpeg" alt="Recicladores de ASOREVID con funcionarios en la bodega de acopio" loading="lazy">
+                        <figcaption>Bodega de acopio (ECA)</figcaption>
+                    </figure>
+
+                    <!-- Foto 3: Campaña de separación en la fuente -->
+                    <figure class="galeria-item">
+                        <img src="galeria3.jpeg" alt="Campaña de separación en la fuente de residuos aprovechables - Decreto 1381 de 2024" loading="lazy">
+                        <figcaption>Separación en la fuente</figcaption>
+                    </figure>
+
+                    <!-- Foto 4: Jornada en vía pública -->
+                    <figure class="galeria-item">
+                        <img src="galeria4.jpeg" alt="Jornada de socialización en vía pública con la comunidad" loading="lazy">
+                        <figcaption>Jornada en vía pública</figcaption>
+                    </figure>
+
+                    <!-- Foto 5: Pendón institucional -->
+                    <figure class="galeria-item">
+                        <img src="galeria5.jpeg" alt="Pendón institucional ASOREVID con aliados UAESP y Superservicios" loading="lazy">
+                        <figcaption>Aliados institucionales</figcaption>
+                    </figure>
+
+                    <!-- Foto 6: Campamentos Juveniles -->
+                    <figure class="galeria-item">
+                        <img src="galeria6.jpeg" alt="Participación de ASOREVID en Campamentos Juveniles Regional Bogotá" loading="lazy">
+                        <figcaption>Campamentos Juveniles</figcaption>
+                    </figure>
+
+                    <!-- Foto 7: Compromiso comunitario -->
+                    <figure class="galeria-item">
+                        <img src="galeria7.jpeg" alt="Compromiso de ASOREVID con la comunidad en actividades recreativas" loading="lazy">
+                        <figcaption>Compromiso comunitario</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
         <!-- SECCIÓN PQR -->
         <section id="pqr" class="section">
             <div class="container">
@@ -317,7 +373,6 @@
         <p>&copy; 2026 ASOREVID - Todos los derechos reservados. Compromiso y Sostenibilidad Ambiental.</p>
     </footer>
 
-    <!-- JS Externos e Interno -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>

@@ -1,20 +1,22 @@
 /**
  * ASOREVID - Lógica Frontend, Navegación SPA y Gestión de PQR con EmailJS
- * Versión Optimizada y Segura
+ * Versión Completa con Gráfico de Toneladas y Galería
  */
 
 window.leafletMap = null;
+window.graficoInstance = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initMap();
+    initGraficoToneladas();
     renderMaterials();
     renderRoutesTable();
     initFormValidation();
     initSearchFilter();
 });
 
-/* --- SANITIZACIÓN Y CREACIÓN SEGURA DE NODOS --- */
+/* --- SANITIZACIÓN --- */
 function escapeHTML(str) {
     if (!str) return '';
     return String(str)
@@ -26,7 +28,7 @@ function escapeHTML(str) {
         .replace(/\//g, '&#x2F;');
 }
 
-/* --- GENERADOR DE CONSECUTIVO AUTOMÁTICO --- */
+/* --- CONSECUTIVO PQR --- */
 function obtenerSiguienteRadicado() {
     let contador = parseInt(localStorage.getItem('pqr_consecutivo'), 10) || 1;
     const numeroFormateado = String(contador).padStart(3, '0');
@@ -34,7 +36,7 @@ function obtenerSiguienteRadicado() {
     return { contador, codigoRadicado };
 }
 
-/* --- CONTROL DE NAVEGACIÓN SPA --- */
+/* --- NAVEGACIÓN SPA --- */
 function initNavigation() {
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('.section');
@@ -59,9 +61,10 @@ function initNavigation() {
             if (targetId === 'servicios') {
                 renderRoutesTable();
                 if (window.leafletMap) {
-                    setTimeout(() => {
-                        window.leafletMap.invalidateSize();
-                    }, 200);
+                    setTimeout(() => window.leafletMap.invalidateSize(), 250);
+                }
+                if (window.graficoInstance) {
+                    setTimeout(() => window.graficoInstance.resize(), 250);
                 }
             }
 
@@ -70,10 +73,143 @@ function initNavigation() {
     });
 }
 
-/* --- MAPA CON LEAFLET --- */
+/* --- GRÁFICO DE TONELADAS --- */
+function initGraficoToneladas() {
+    const canvas = document.getElementById('graficoToneladas');
+    if (!canvas || typeof Chart === 'undefined') return;
+
+    // Registrar el plugin de etiquetas (Chart.js v4 requiere registro explícito)
+    if (typeof ChartDataLabels !== 'undefined') {
+        Chart.register(ChartDataLabels);
+    }
+
+    const ctx = canvas.getContext('2d');
+
+    const datos = {
+        labels: ['2024', '2025', '2026'],
+        aprovechadas: [6844.16, 6073.13, 4016.81],
+        rechazo: [308, 121, 104]
+    };
+
+    // Función auxiliar para formatear números bonitos
+    const formatearValor = (valor) => {
+        return Number.isInteger(valor)
+            ? valor.toLocaleString('es-CO')
+            : valor.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    };
+
+    window.graficoInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: datos.labels,
+            datasets: [
+                {
+                    label: 'Toneladas Aprovechadas',
+                    data: datos.aprovechadas,
+                    backgroundColor: 'rgba(46, 125, 50, 0.85)',
+                    borderColor: '#1b5e20',
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                    maxBarThickness: 70
+                },
+                {
+                    label: 'Toneladas de Rechazo',
+                    data: datos.rechazo,
+                    backgroundColor: 'rgba(198, 40, 40, 0.85)',
+                    borderColor: '#8e0000',
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                    maxBarThickness: 70
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: 30  // Espacio arriba para que no se corten las etiquetas
+                }
+            },
+            animation: { duration: 1200, easing: 'easeOutQuart' },
+            plugins: {
+                /* === NUEVO: Configuración de las etiquetas sobre las barras === */
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    offset: 4,
+                    color: '#2c3e50',
+                    font: {
+                        size: 11,
+                        weight: '700',
+                        family: "'Segoe UI', sans-serif"
+                    },
+                    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                    borderColor: 'rgba(0, 0, 0, 0.08)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    padding: { top: 3, bottom: 3, left: 6, right: 6 },
+                    formatter: (value, context) => {
+                        // Formato corto para valores grandes (evita etiquetas enormes)
+                        if (value >= 1000) {
+                            return value.toLocaleString('es-CO', { maximumFractionDigits: 0 });
+                        }
+                        return formatearValor(value);
+                    },
+                    // Solo oculta etiquetas si el valor es 0
+                    display: (context) => context.dataset.data[context.dataIndex] > 0
+                },
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: { size: 13, weight: '600' },
+                        usePointStyle: true,
+                        pointStyle: 'rectRounded',
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(44, 62, 80, 0.95)',
+                    titleFont: { size: 14, weight: '700' },
+                    bodyFont: { size: 13 },
+                    padding: 12,
+                    cornerRadius: 8,
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${formatearValor(context.parsed.y)} Ton`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Toneladas',
+                        font: { size: 13, weight: '700' },
+                        color: '#2c3e50'
+                    },
+                    grid: { color: 'rgba(0, 0, 0, 0.06)', drawBorder: false },
+                    ticks: {
+                        font: { size: 12 },
+                        callback: (value) => value.toLocaleString('es-CO')
+                    }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 13, weight: '600' }, color: '#2c3e50' }
+                }
+            }
+        }
+    });
+}
+/* --- MAPA --- */
 function initMap() {
     const mapContainer = document.getElementById('map');
-    if (!mapContainer) return;
+    if (!mapContainer || typeof L === 'undefined') return;
 
     window.leafletMap = L.map('map').setView([4.6500, -74.0900], 11);
 
@@ -140,7 +276,7 @@ function renderMaterials() {
     `).join('');
 }
 
-/* --- TABLA DE RUTAS --- */
+/* --- RUTAS --- */
 function generate100Routes() {
     const localidades = ["Chapinero", "Usaquén", "Suba", "Puente Aranda", "Fontibón", "Engativá", "Rafael Uribe Uribe", "Teusaquillo", "Santa Fé", "Barrios Unidos"];
     const frecuencias = ["Lunes a Sábado", "Martes - Jueves", "Lunes - Miércoles - Viernes", "Martes - Jueves - Sábado"];
@@ -179,7 +315,7 @@ function renderRoutesTable(filteredRoutes = routesData) {
     `).join('');
 }
 
-/* --- FILTRO BÚSQUEDA CON DEBOUNCE --- */
+/* --- BUSCADOR --- */
 function debounce(func, delay = 300) {
     let timeout;
     return (...args) => {
@@ -205,7 +341,7 @@ function initSearchFilter() {
     searchInput.addEventListener('input', handleSearch);
 }
 
-/* --- VALIDACIÓN DE FORMULARIO Y ENVÍO EMAILJS --- */
+/* --- FORMULARIO PQR --- */
 function initFormValidation() {
     const form = document.getElementById('pqrForm');
     const alertBox = document.getElementById('pqrAlert');
@@ -238,14 +374,12 @@ function initFormValidation() {
             return;
         }
 
-        // Estado visual de carga
         const submitBtn = form.querySelector('.btn-submit');
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Radicando...';
 
         const { contador, codigoRadicado } = obtenerSiguienteRadicado();
 
-        // IMPORTANTE: Enviar el texto plano directamente sin escapeHTML()
         const templateParams = {
             radicado: codigoRadicado,
             nombre: nombre,
@@ -262,12 +396,10 @@ function initFormValidation() {
                 form.reset();
             })
             .catch((err) => {
-                // Extrae y muestra el mensaje explicativo real que devuelve EmailJS
                 const detalleError = (err && err.text) ? err.text : JSON.stringify(err);
                 console.error("Detalle del fallo EmailJS:", detalleError);
-    
                 showAlert('Ocurrió un error al enviar el correo. Por favor intente más tarde o escriba a asorevid2020@gmail.com', 'error');
-                })
+            })
             .finally(() => {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Radicar PQR';
@@ -275,7 +407,7 @@ function initFormValidation() {
     });
 
     function showAlert(msg, type) {
-        alertBox.textContent = msg; // Uso seguro de textContent sin modificar sintaxis
+        alertBox.textContent = msg;
         alertBox.className = `alert ${type}`;
         alertBox.classList.remove('hidden');
         setTimeout(() => alertBox.classList.add('hidden'), 8000);
