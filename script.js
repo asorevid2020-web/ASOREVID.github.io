@@ -78,7 +78,6 @@ function initGraficoToneladas() {
     const canvas = document.getElementById('graficoToneladas');
     if (!canvas || typeof Chart === 'undefined') return;
 
-    // Registrar el plugin de etiquetas (Chart.js v4 requiere registro explícito)
     if (typeof ChartDataLabels !== 'undefined') {
         Chart.register(ChartDataLabels);
     }
@@ -88,10 +87,9 @@ function initGraficoToneladas() {
     const datos = {
         labels: ['2024', '2025', '2026'],
         aprovechadas: [6844.16, 6073.13, 4016.81],
-        rechazo: [308, 121, 104]
+        rechazo: [308, 121, 141]
     };
 
-    // Función auxiliar para formatear números bonitos
     const formatearValor = (valor) => {
         return Number.isInteger(valor)
             ? valor.toLocaleString('es-CO')
@@ -130,12 +128,11 @@ function initGraficoToneladas() {
             maintainAspectRatio: false,
             layout: {
                 padding: {
-                    top: 30  // Espacio arriba para que no se corten las etiquetas
+                    top: 30
                 }
             },
             animation: { duration: 1200, easing: 'easeOutQuart' },
             plugins: {
-                /* === NUEVO: Configuración de las etiquetas sobre las barras === */
                 datalabels: {
                     anchor: 'end',
                     align: 'end',
@@ -152,13 +149,11 @@ function initGraficoToneladas() {
                     borderRadius: 4,
                     padding: { top: 3, bottom: 3, left: 6, right: 6 },
                     formatter: (value, context) => {
-                        // Formato corto para valores grandes (evita etiquetas enormes)
                         if (value >= 1000) {
                             return value.toLocaleString('es-CO', { maximumFractionDigits: 0 });
                         }
                         return formatearValor(value);
                     },
-                    // Solo oculta etiquetas si el valor es 0
                     display: (context) => context.dataset.data[context.dataIndex] > 0
                 },
                 legend: {
@@ -206,6 +201,7 @@ function initGraficoToneladas() {
         }
     });
 }
+
 /* --- MAPA --- */
 function initMap() {
     const mapContainer = document.getElementById('map');

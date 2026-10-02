@@ -165,6 +165,21 @@ h2 {
     box-shadow: var(--shadow-hover);
 }
 
+.whatsapp-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+}
+
+.whatsapp-link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
 .values-grid {
     display: flex;
     flex-wrap: wrap;
